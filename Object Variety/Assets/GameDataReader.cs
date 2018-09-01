@@ -6,10 +6,12 @@ using UnityEngine;
 public class GameDataReader 
 {
 	private BinaryReader _reader;
+	public int Version { get; set; }
 
-	public GameDataReader(BinaryReader reader)
+	public GameDataReader(BinaryReader reader, int version)
 	{
 		_reader = reader;
+		Version = version;
 	}
 
 	public float ReadFloat()
@@ -35,11 +37,22 @@ public class GameDataReader
 
 	public Vector3 ReadVector3()
 	{
-		Vector3 p;
-		p.x = _reader.ReadSingle();
-		p.y = _reader.ReadSingle();
-		p.z = _reader.ReadSingle();
+		Vector3 value;
+		value.x = _reader.ReadSingle();
+		value.y = _reader.ReadSingle();
+		value.z = _reader.ReadSingle();
 
-		return p;
+		return value;
+	}
+
+	public Color ReadColor()
+	{
+		Color value;
+		value.r = _reader.ReadSingle();
+		value.g = _reader.ReadSingle();
+		value.b = _reader.ReadSingle();
+		value.a = _reader.ReadSingle();
+
+		return value;
 	}
 }
